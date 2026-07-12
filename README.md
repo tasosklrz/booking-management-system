@@ -1,6 +1,9 @@
 # Booking Management System
 
-Τελική εργασία για το Coding Factory 9. Η εφαρμογή είναι ένα σύστημα διαχείρισης κρατήσεων με frontend, backend, βάση δεδομένων, REST API, Swagger τεκμηρίωση και μηχανισμό authentication/authorization.
+Τελική εργασία για το Coding Factory 9.
+Ονοματεπώνυμο: Κολορίζος Αναστάσιος.
+
+Η εφαρμογή είναι ένα σύστημα διαχείρισης κρατήσεων με frontend, backend, βάση δεδομένων, REST API, Swagger τεκμηρίωση και μηχανισμό authentication/authorization.
 
 ## Τεχνολογίες
 
