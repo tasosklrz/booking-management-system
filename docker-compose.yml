@@ -1,0 +1,15 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: booking-management-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: booking_management
+    ports:
+      - "3306:3306"
+    volumes:
+      - booking_management_mysql_data:/var/lib/mysql
+
+volumes:
+  booking_management_mysql_data:

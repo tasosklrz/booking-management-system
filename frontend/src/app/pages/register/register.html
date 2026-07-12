@@ -1,0 +1,35 @@
+<main class="auth-page">
+  <section class="auth-panel">
+    <div>
+      <p class="eyebrow">Booking Management</p>
+      <h1>Εγγραφή</h1>
+      <p class="supporting-text">Οι νέοι λογαριασμοί δημιουργούνται με δικαιώματα USER.</p>
+    </div>
+
+    <form class="auth-form" (ngSubmit)="submitRegister()">
+      <label>
+        Όνομα χρήστη
+        <input name="username" [(ngModel)]="username" required />
+      </label>
+
+      <label>
+        Email
+        <input name="email" type="email" [(ngModel)]="email" required />
+      </label>
+
+      <label>
+        Κωδικός
+        <input name="password" type="password" [(ngModel)]="password" required minlength="6" />
+      </label>
+
+      <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Δημιουργία...' : 'Δημιουργία λογαριασμού' }}
+      </button>
+    </form>
+
+    <a routerLink="/login">Επιστροφή στη σύνδεση</a>
+  </section>
+</main>

@@ -1,0 +1,29 @@
+<main class="auth-page">
+  <section class="auth-panel">
+    <div>
+      <p class="eyebrow">Booking Management</p>
+      <h1>Σύνδεση</h1>
+      <p class="supporting-text">Για δοκιμή χρησιμοποιήστε admin/admin123 ή user/user123.</p>
+    </div>
+
+    <form class="auth-form" (ngSubmit)="submitLogin()">
+      <label>
+        Όνομα χρήστη
+        <input name="username" [(ngModel)]="username" required />
+      </label>
+
+      <label>
+        Κωδικός
+        <input name="password" type="password" [(ngModel)]="password" required />
+      </label>
+
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Γίνεται σύνδεση...' : 'Σύνδεση' }}
+      </button>
+    </form>
+
+    <a routerLink="/register">Δημιουργία νέου λογαριασμού</a>
+  </section>
+</main>

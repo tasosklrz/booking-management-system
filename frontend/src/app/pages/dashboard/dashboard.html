@@ -1,0 +1,234 @@
+<main class="dashboard-shell">
+  <aside class="sidebar">
+    <div>
+      <p class="eyebrow">Booking Management</p>
+      <h1>Πίνακας Ελέγχου</h1>
+      <p class="user-line">{{ currentUser?.username }} · {{ currentUser?.role }}</p>
+    </div>
+
+    <nav class="section-nav">
+      <button
+        type="button"
+        [class.active]="activeSection === 'bookings'"
+        (click)="setActiveSection('bookings')"
+      >
+        Κρατήσεις
+      </button>
+      <button
+        type="button"
+        [class.active]="activeSection === 'customers'"
+        (click)="setActiveSection('customers')"
+      >
+        Πελάτες
+      </button>
+      <button
+        type="button"
+        [class.active]="activeSection === 'services'"
+        (click)="setActiveSection('services')"
+      >
+        Υπηρεσίες
+      </button>
+    </nav>
+
+    <button type="button" class="logout-button" (click)="logout()">Αποσύνδεση</button>
+  </aside>
+
+  <section class="content-area">
+    <div class="status-row" *ngIf="message || errorMessage">
+      <p class="success-message" *ngIf="message">{{ message }}</p>
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+    </div>
+
+    <section *ngIf="activeSection === 'bookings'" class="workspace-section">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Κρατήσεις</p>
+          <h2>Διαχείριση Κρατήσεων</h2>
+        </div>
+      </div>
+
+      <form class="data-form" (ngSubmit)="createBooking()">
+        <label>
+          Πελάτης
+          <select name="customerId" [(ngModel)]="bookingForm.customerId" required>
+            <option [ngValue]="0">Επιλέξτε πελάτη</option>
+            <option *ngFor="let customer of customers" [ngValue]="customer.customerId">
+              {{ customer.fullName }}
+            </option>
+          </select>
+        </label>
+
+        <label>
+          Υπηρεσία
+          <select name="serviceId" [(ngModel)]="bookingForm.serviceId" required>
+            <option [ngValue]="0">Επιλέξτε υπηρεσία</option>
+            <option *ngFor="let service of services" [ngValue]="service.serviceId">
+              {{ service.serviceName }}
+            </option>
+          </select>
+        </label>
+
+        <label>
+          Ημερομηνία και ώρα
+          <input name="bookingDateTime" type="datetime-local" [(ngModel)]="bookingForm.bookingDateTime" required />
+        </label>
+
+        <button type="submit">Δημιουργία κράτησης</button>
+      </form>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Πελάτης</th>
+              <th>Υπηρεσία</th>
+              <th>Ημερομηνία</th>
+              <th>Κατάσταση</th>
+              <th>Ενέργειες</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let booking of bookings">
+              <td>{{ booking.customer.fullName }}</td>
+              <td>{{ booking.bookableService.serviceName }}</td>
+              <td>{{ booking.bookingDateTime | date: 'medium' }}</td>
+              <td>
+                <span class="status-badge">{{ getBookingStatusLabel(booking.bookingStatus) }}</span>
+              </td>
+              <td class="action-cell">
+                <button type="button" (click)="updateBookingStatus(booking.bookingId, 'CONFIRMED')">
+                  Επιβεβαίωση
+                </button>
+                <button type="button" (click)="updateBookingStatus(booking.bookingId, 'CANCELLED')">
+                  Ακύρωση
+                </button>
+                <button type="button" class="danger-button" (click)="deleteBooking(booking.bookingId)">
+                  Διαγραφή
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section *ngIf="activeSection === 'customers'" class="workspace-section">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Πελάτες</p>
+          <h2>Διαχείριση Πελατών</h2>
+        </div>
+      </div>
+
+      <form class="data-form" (ngSubmit)="createCustomer()">
+        <label>
+          Ονοματεπώνυμο
+          <input name="fullName" [(ngModel)]="customerForm.fullName" required />
+        </label>
+
+        <label>
+          Email
+          <input name="email" type="email" [(ngModel)]="customerForm.email" required />
+        </label>
+
+        <label>
+          Τηλέφωνο
+          <input name="phoneNumber" [(ngModel)]="customerForm.phoneNumber" required />
+        </label>
+
+        <button type="submit">Δημιουργία πελάτη</button>
+      </form>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Όνομα</th>
+              <th>Email</th>
+              <th>Τηλέφωνο</th>
+              <th *ngIf="isAdmin">Ενέργειες</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let customer of customers">
+              <td>{{ customer.fullName }}</td>
+              <td>{{ customer.email }}</td>
+              <td>{{ customer.phoneNumber }}</td>
+              <td *ngIf="isAdmin">
+                <button type="button" class="danger-button" (click)="deleteCustomer(customer.customerId)">
+                  Διαγραφή
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section *ngIf="activeSection === 'services'" class="workspace-section">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Κατάλογος</p>
+          <h2>Διαχείριση Υπηρεσιών</h2>
+        </div>
+      </div>
+
+      <form class="data-form" (ngSubmit)="createService()" *ngIf="isAdmin">
+        <label>
+          Όνομα
+          <input name="serviceName" [(ngModel)]="serviceForm.serviceName" required />
+        </label>
+
+        <label>
+          Διάρκεια
+          <input
+            name="durationMinutes"
+            type="number"
+            min="1"
+            [(ngModel)]="serviceForm.durationMinutes"
+            required
+          />
+        </label>
+
+        <label>
+          Τιμή
+          <input name="price" type="number" min="0" step="0.01" [(ngModel)]="serviceForm.price" required />
+        </label>
+
+        <label class="wide-field">
+          Περιγραφή
+          <input name="description" [(ngModel)]="serviceForm.description" />
+        </label>
+
+        <button type="submit">Δημιουργία υπηρεσίας</button>
+      </form>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Όνομα</th>
+              <th>Περιγραφή</th>
+              <th>Διάρκεια</th>
+              <th>Τιμή</th>
+              <th *ngIf="isAdmin">Ενέργειες</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let service of services">
+              <td>{{ service.serviceName }}</td>
+              <td>{{ service.description }}</td>
+              <td>{{ service.durationMinutes }} min</td>
+              <td>{{ service.price | currency: 'EUR' }}</td>
+              <td *ngIf="isAdmin">
+                <button type="button" class="danger-button" (click)="deleteService(service.serviceId)">
+                  Διαγραφή
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+</main>

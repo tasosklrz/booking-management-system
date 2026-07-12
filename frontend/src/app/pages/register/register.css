@@ -1,0 +1,6 @@
+@import '../login/login.css';
+
+.success-message {
+  margin: 0;
+  color: #087443;
+}
