@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        // Syndesh tou Spring Security me tous xrhstes ths vashs
+        // Σύνδεση του Spring Security με τους χρήστες της βάσης δεδομένων
         authenticationManagerBuilder
                 .userDetailsService(applicationUserService)
                 .passwordEncoder(passwordEncoder);
@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // Orismos prosvasis sta endpoints analoga me ton rolo tou xrhsth
+        // Ορισμός πρόσβασης στα endpoints ανάλογα με τον ρόλο του χρήστη
         httpSecurity
                 .cors()
                 .and()

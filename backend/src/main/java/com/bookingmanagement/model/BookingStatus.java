@@ -1,6 +1,6 @@
 package com.bookingmanagement.model;
 
-// Diathesimes katastaseis gia mia krathsh
+// Διαθέσιμες καταστάσεις για μια κράτηση.
 public enum BookingStatus {
     PENDING,
     CONFIRMED,

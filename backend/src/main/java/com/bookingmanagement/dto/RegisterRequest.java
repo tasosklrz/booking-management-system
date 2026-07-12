@@ -4,7 +4,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-// Dedomena eisodou gia eggrafh neou xrhsth
+/**
+ * Δεδομένα εισόδου για εγγραφή νέου χρήστη.
+ */
 public class RegisterRequest {
 
     @NotBlank

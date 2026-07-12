@@ -27,14 +27,14 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<ApplicationUser> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
-        // Kataxwrhsh neou xrhsth sto systhma
+        // Καταχώριση νέου χρήστη στο σύστημα
         ApplicationUser applicationUser = applicationUserService.registerUser(registerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(applicationUser);
     }
 
     @GetMapping("/profile")
     public ApplicationUser getAuthenticatedUser(Principal principal) {
-        // Epistrofh stoixeiwn tou syndedemenou xrhsth
+        // Επιστροφη στοιχείων του συνδεδεμένου χρήστη
         return applicationUserService.getUserByUsername(principal.getName());
     }
 }

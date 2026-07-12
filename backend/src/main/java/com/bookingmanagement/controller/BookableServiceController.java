@@ -29,7 +29,7 @@ public class BookableServiceController {
 
     @GetMapping
     public List<BookableService> getAllBookableServices() {
-        // Anagnwsh olwn twn diathesimwn yphresiwn
+        // Ανάγνωση όλων των διαθέσιμων υπηρεσιων
         return bookableServiceService.getAllBookableServices();
     }
 
@@ -40,7 +40,7 @@ public class BookableServiceController {
 
     @PostMapping
     public ResponseEntity<BookableService> createBookableService(@Valid @RequestBody BookableService bookableService) {
-        // Kataxwrhsh neas yphresias
+        // Καταχώρηση νέας υπηρεσίας
         BookableService savedService = bookableServiceService.createBookableService(bookableService);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedService);
     }
@@ -54,7 +54,7 @@ public class BookableServiceController {
 
     @DeleteMapping("/{serviceId}")
     public ResponseEntity<Void> deleteBookableService(@PathVariable Long serviceId) {
-        // Diagrafh yphresias me vash to monadiko id
+        // Διαγραφή υπηρεσίας με βάση το ID.
         bookableServiceService.deleteBookableService(serviceId);
         return ResponseEntity.noContent().build();
     }

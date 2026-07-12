@@ -14,7 +14,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 @Entity
-// Ontothta gia thn krathsh pou syndeetai me pelath kai yphresia
+// Οντότητα για την κράτηση που συνδέεται με πελάτη και υπηρεσία
 public class Booking {
 
     @Id

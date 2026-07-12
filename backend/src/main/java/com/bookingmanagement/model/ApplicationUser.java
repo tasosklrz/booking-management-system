@@ -12,7 +12,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-// Ontothta gia tous xrhstes pou kanoun syndesh sto systhma
+// Οντότητα για τους χρήστες που κάνουν σύνδεση στο σύστημα
 public class ApplicationUser {
 
     @Id

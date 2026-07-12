@@ -10,7 +10,7 @@ public class PasswordConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Kryptografhsh kwdikwn prin apothhkeytoun sth vash
+        // Κρυπτογράφηση κωδικών πριν αποθηκευτούν στη βάση
         return new BCryptPasswordEncoder();
     }
 }

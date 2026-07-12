@@ -28,13 +28,13 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Arxikopoihsh vasikwn dedomenwn kata thn ekkinhsh ths efarmoghs
+        // // Αρχικοποίηση βασικών δεδομένων κατά την εκκίνηση της εφαρμογής
         createDefaultUsers();
         createDefaultServices();
     }
 
     private void createDefaultUsers() {
-        // Dhmiourgia proepilegmenwn xrhstwn gia dokimh tou systhmatos
+        // Δημιουργία προεπιλεγμένων χρηστών για δοκιμή του συστήματος
         if (!applicationUserRepository.existsByUsername("admin")) {
             ApplicationUser adminUser = new ApplicationUser();
             adminUser.setUsername("admin");
@@ -55,7 +55,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void createDefaultServices() {
-        // Apofygh diplwn kataxwrhsewn otan yparxoun hdh yphresies
+        // Αποφυγή διπλών καταχωρήσεων όταν υπάρχουν ήδη υπηρεσίες
         if (bookableServiceRepository.count() > 0) {
             return;
         }
@@ -84,7 +84,7 @@ public class DataInitializer implements CommandLineRunner {
             String description,
             Integer durationMinutes,
             BigDecimal price) {
-        // Sygkentrwsh ths dhmiourgias yphresias se ena shmeio
+        // Συγκέντρωση της δημιουργίας των υπηρεσιών σε ένα σημείο
         BookableService bookableService = new BookableService();
         bookableService.setServiceName(serviceName);
         bookableService.setDescription(description);

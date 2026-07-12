@@ -31,7 +31,7 @@ public class BookingController {
 
     @GetMapping
     public List<Booking> getAllBookings() {
-        // Anagnwsh olwn twn krathsewn
+        // Ανάγνωση των κρατήσεων
         return bookingService.getAllBookings();
     }
 
@@ -47,7 +47,7 @@ public class BookingController {
 
     @PostMapping
     public ResponseEntity<Booking> createBooking(@Valid @RequestBody CreateBookingRequest createBookingRequest) {
-        // Dhmiourgia neas krathshs gia pelath kai yphresia
+        // Δημιουργία νέας κράτησης και υπηρεσίας
         Booking savedBooking = bookingService.createBooking(createBookingRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBooking);
     }
@@ -56,7 +56,7 @@ public class BookingController {
     public Booking updateBookingStatus(
             @PathVariable Long bookingId,
             @Valid @RequestBody UpdateBookingStatusRequest updateBookingStatusRequest) {
-        // Enhmerwsh katastashs krathshs
+        // Ενημέρωση κατάστασης κράτησης
         return bookingService.updateBookingStatus(bookingId, updateBookingStatusRequest.getBookingStatus());
     }
 

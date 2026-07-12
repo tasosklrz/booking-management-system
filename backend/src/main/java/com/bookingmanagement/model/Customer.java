@@ -9,7 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-// Ontothta gia ta stoixeia tou pelath
+// Οντότητα για τα στοιχεία του πελάτη
 public class Customer {
 
     @Id

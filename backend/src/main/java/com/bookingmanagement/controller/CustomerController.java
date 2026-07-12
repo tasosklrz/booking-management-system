@@ -29,7 +29,7 @@ public class CustomerController {
 
     @GetMapping
     public List<Customer> getAllCustomers() {
-        // Anagnwsh olwn twn pelatwn
+        // Ανάγνωση όλων των πελατών
         return customerService.getAllCustomers();
     }
 
@@ -40,7 +40,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
-        // Kataxwrhsh neou pelath
+        // Καταχώριση νέου πελάτη
         Customer savedCustomer = customerService.createCustomer(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCustomer);
     }
@@ -52,7 +52,7 @@ public class CustomerController {
 
     @DeleteMapping("/{customerId}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long customerId) {
-        // Diagrafh pelath me vash to monadiko id
+        // Διαγραφη πελατών με βάση το ID
         customerService.deleteCustomer(customerId);
         return ResponseEntity.noContent().build();
     }

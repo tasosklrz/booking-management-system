@@ -1,6 +1,6 @@
 package com.bookingmanagement.model;
 
-// Roloi pou kathorizoun ta dikaiwmata prosvasis
+//Ρόλοι που καθορίζουν το δικαίωμα πρόσβασης.
 public enum UserRole {
     USER,
     ADMIN

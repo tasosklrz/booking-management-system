@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-// Ontothta gia yphresies pou mporoun na kraththoun
+// Οντότητα για υπηρεσίες που μπορούν να κρατηθούν
 public class BookableService {
 
     @Id

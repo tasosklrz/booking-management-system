@@ -3,7 +3,9 @@ package com.bookingmanagement.dto;
 import com.bookingmanagement.model.BookingStatus;
 import javax.validation.constraints.NotNull;
 
-// Dedomena eisodou gia allagh katastashs krathshs
+/**
+ * Δεδομένα εισόδου για αλλαγή κατάστασης κράτησης
+ */
 public class UpdateBookingStatusRequest {
 
     @NotNull

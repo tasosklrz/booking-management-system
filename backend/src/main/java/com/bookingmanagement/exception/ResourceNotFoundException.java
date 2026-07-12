@@ -1,6 +1,6 @@
 package com.bookingmanagement.exception;
 
-// Eksairesh otan den vrethei mia eggrafh sth vash
+// Εξαίρεση όταν δεν βρεθεί μια εγγραφή στη βάση δεδομένων.
 public class ResourceNotFoundException extends RuntimeException {
 
     public ResourceNotFoundException(String message) {
